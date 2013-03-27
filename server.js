@@ -6,7 +6,7 @@ var app = require('express')(),
 	express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
-	eibd = require('eibd');
+	eibc = require('./eibc');
 
 var port = process.env.PORT || 3000;
 
@@ -25,3 +25,5 @@ io.sockets.on('connection', function (socket) {
 		callback({"article":addr,"status":1});
 	});
 });
+
+eibc.groupswrite();
