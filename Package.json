@@ -7,5 +7,5 @@
     "socket.io": "0.9.13",
     "eibd": "0.1.7"
   },
-  "engine": "node >= 0.4.1"
+  "engine": "0.8.x"
 }
