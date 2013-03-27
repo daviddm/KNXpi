@@ -25,21 +25,24 @@ var eibc = function(){
 	that.connect = function(opts, callback) {
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
-		conn.socketRemote(opts, function() {
-			console.log('EIBD Connected');
-			callback();
-		});
 		conn.socket.on('data', function(data){
 			if(que.length > 0) {
 				
 			}
-			console.log('DATA: ' + data.toString());
+			console.log(data);
 		});
 		conn.socket.on('end', function(){
 			console.log('EIBD Closed the connection');
 		});
+		conn.socket.on('connect', function(){
+			console.log('EIBD Connected');
+			callback();
+		});
 		conn.socket.on('close', function(){
 			console.log('EIBD Transmission error');
+		});
+		conn.socketRemote(opts, function() {
+			
 		});
 	};
 	
@@ -62,36 +65,6 @@ var eibc = function(){
 			});
 		});
 	};
-	
-	that.test = function() {
-		var conn = new eibd();
-		conn.onData = function(data){
-			console.log(data);
-		}
-		conn.socketRemote(EIBClient.opts, function() {
-			// connected
-			if(conn.socket) {
-				console.log('EIBD Connected');
-			} else {
-				console.log('EIBD Failed');
-			}
-			setTimeout(conn.test, 800); 
-		});
-		conn.test = function(){
-			conn.openTGroup(conn.str2addr('1/0/0'), 0, function (err) {
-				console.log('Opened group');
-		    if(err) {
-		      console.log(err);
-		    } else {
-		      var data = new Array(2);
-		      data[0] = 0;
-		      data[1] = 0x80; 
-		      conn.sendAPDU(data, function(){console.log('Sent')});
-		    }
-
-		  });
-		}
-	};
-	
+		
 	return that;
 }();
