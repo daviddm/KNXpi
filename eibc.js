@@ -25,6 +25,9 @@ var eibc = function(){
 	that.connect = function(opts, callback) {
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
+		conn.socketRemote(opts, function() {
+			// Connected
+		});
 		conn.socket.on('data', function(data){
 			if(que.length > 0) {
 				
@@ -40,9 +43,6 @@ var eibc = function(){
 		});
 		conn.socket.on('close', function(){
 			console.log('EIBD Transmission error');
-		});
-		conn.socketRemote(opts, function() {
-			
 		});
 	};
 	
