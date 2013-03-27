@@ -24,6 +24,7 @@ var eibc = function(){
 	
 	that.connect = function(opts, callback) {
 		conn = eibd();
+		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
 		conn.socketRemote(opts, function() {
 			console.log('EIBD Connected');
 			callback();
