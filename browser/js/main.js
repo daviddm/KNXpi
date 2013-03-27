@@ -14,10 +14,21 @@ COM.Web = function(){
 		var buttons = $('button');
 		$('button').each(function(){
 			element = this;
+			jqElement = $(element);
 			element.innerHTML = 'Checking...';
-			var addr = $(element).data('article-address');
+			var addr = jqElement.data('article-address');
 			COM.Server.checkStatus(addr, function(data){that.updateStatus(element, data)});
+			jqElement.click(buttonClick);
 		});
+	};
+	var buttonClick = function(e) {
+		jqThis = $(this);
+		var addr = jqThis.data('article-address');
+		var status = jqThis.data('article-status');
+		var status_new = (status === 1 ? 0 : 1);
+		COM.Server.changeStatus(addr, status_new, function(){});
+		jqThis.data('article-status', status_new);
+		return false;
 	};
 	that.updateStatus = function(element, data){
 		COM.Log.debug('Status for ' + data.article + ' is ' + data.status);
@@ -31,17 +42,21 @@ COM.Server = function(){
 	var socket;
 	that.connect = function(callback){
 		socket = io.connect('/');
-		socket.on('connect', function(){
+		socket.on('connect', function() {
 			COM.Log.debug('Connected to socket');
 			callback();
 		});
-		socket.on('connect_failed', function(){
+		socket.on('connect_failed', function() {
 			COM.Log.error('Failed to connected to socket');
 		});
 	};
-	that.checkStatus = function(addr, callback){
+	that.checkStatus = function(addr, callback) {
 		COM.Log.debug('Checking status for ' + addr);
 		socket.emit('articleStatus', addr, callback);
+	};
+	that.changeStatus = function(addr, val, callback) {
+		COM.Log.debug('Changin status for ' + addr + ' to "' + val + '"');
+		socket.emit('articleStatusChange', addr, val, callback);
 	};
 	return that;
 }();

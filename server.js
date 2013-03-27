@@ -24,6 +24,10 @@ io.sockets.on('connection', function (socket) {
 	socket.on('articleStatus', function (addr, callback) {
 		callback({"article":addr,"status":1});
 	});
+	socket.on('articleStatusChange', function (addr, val, callback) {
+		eibc.groupswrite(addr, val, function() {
+			callback();
+		});
+	});
 });
 
-eibc.groupswrite();
