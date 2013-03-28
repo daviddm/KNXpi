@@ -36,7 +36,7 @@ var Client = function(){
 			// TODO: check error
 			conn.socket.setNoDelay(true);
 			conn.socket.setKeepAlive(true);
-			openGroup(0);
+//			openGroup(0);
 		});
 		
 		
