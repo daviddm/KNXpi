@@ -47,15 +47,12 @@ var eibc = function(){
 	};
 	
 	/**
+	 * For sending less than 6 bit
 	 * addr - in format x/x/x
 	 * value - 1|0
 	 */
 	that.groupswrite = function(addr, val, callback) {
-		if(typeof conn === 'undefined'){console.log('Trying to send too early');return false;}
-		conn.openTGroup(conn.str2addr(addr), 0, function (err) {
-			if(err) {
-				console.log('ERROR opening T_Group');
-			}
+		openTGroup(conn.str2addr(addr), 0, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0x80 | val;
@@ -64,6 +61,26 @@ var eibc = function(){
 				if(callback) callback();
 			});
 		});
+	};
+	that.groupread = function(addr, callback) {
+		var data = new Array(2);
+		data[0] = 0;
+		data[1] = 0;
+		conn.sendAPDU(data, function() {
+			console.log('Reading ' + addr)
+			if(callback) callback();
+		});
+	}
+	/**
+	 * addr - in format x/x/x
+	 * wOnly - Write only
+	 */
+	var openTGroup = function(addr, wOnly, callback) {
+		if(typeof conn === 'undefined'){console.log('Open connection before T_Group');return}
+		conn.openTGroup(conn.str2addr(addr), wOnly, function (err) {
+			if(err) {console.log('ERROR opening T_Group');return}
+			callback();
+		}
 	};
 		
 	return that;

@@ -22,7 +22,9 @@ app.use('/js', express.static(__dirname + '/browser/js'));
 io.set('log level', 2);
 io.sockets.on('connection', function (socket) {
 	socket.on('articleStatus', function (addr, callback) {
-		callback({"article":addr,"status":1});
+		eibc.groupread(addr, function() {
+			callback({"article":addr,"status":1});
+		});
 	});
 	socket.on('articleStatusChange', function (addr, val, callback) {
 		eibc.groupswrite(addr, val, function() {
