@@ -25,7 +25,10 @@ var eibc = function(){
 	var conn;
 	
 	that.connect = function(opts, callback) {
-		if(typeof conn != 'undefined'){callback();}
+		if(typeof conn != 'undefined') {
+			if(typeof callback != 'undefined'){callback();}
+			return;
+		}
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
 		conn.socketRemote(opts, function() {
