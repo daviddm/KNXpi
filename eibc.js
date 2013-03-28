@@ -12,15 +12,11 @@ EIBClient.opts = {
 EIBClient.groupswrite = function(addr, val, callback) {
 	if(typeof addr === 'undefined'){return}
 	if(typeof val === 'undefined'){return}
-	eibc.connect(EIBClient.opts, function() {
-		eibc.groupswrite(addr, val, callback);
-	});
+	eibc.groupswrite(addr, val, callback);
 };
 EIBClient.groupread = function(addr, callback) {
 	if(typeof addr === 'undefined'){return}
-	eibc.connect(EIBClient.opts, function() {
-		eibc.groupread(addr, callback);
-	});
+	eibc.groupread(addr, callback);
 };
 
 var eibc = function(){
@@ -123,4 +119,7 @@ var eibc = function(){
 	};
 		
 	return that;
-}();
+};
+
+eibc = eibc();
+eibc.connect(EIBClient.opts);
