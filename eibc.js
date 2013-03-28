@@ -54,11 +54,12 @@ var eibc = function(){
 	
 	/**
 	 * For sending LESS than 6 bit
+	 * 
 	 * addr - in format x/x/x
 	 * value - 1|0
 	 */
 	that.groupswrite = function(addr, val, callback) {
-		openTGroup(conn.str2addr(addr), q, function () {
+		openTGroup(conn.str2addr(addr), 0, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0x80 | val;
@@ -70,6 +71,7 @@ var eibc = function(){
 	};
 	/**
 	 * For sending MORE than 6 bit
+	 * 
 	 * addr - in format x/x/x
 	 * value - 0..255
 	 */
@@ -78,10 +80,11 @@ var eibc = function(){
 	};
 	/**
 	 * Reading status of the addr
+	 * 
 	 * addr - in format x/x/x
 	 */
 	that.groupread = function(addr, callback) {
-		openTGroup(conn.str2addr(addr), 0, function () {
+		openTGroup(eibd.str2addr(addr), 0, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0;
