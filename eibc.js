@@ -131,4 +131,4 @@ var Client = function(){
 };
 
 eibc = Client();
-eibc.connect(EIBClient.opts);
+eibc.connect(EIBClient.opts, function(){console.log('EIBC Started')});
