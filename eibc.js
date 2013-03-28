@@ -31,12 +31,9 @@ var Client = function(){
 		}
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
+		opts.allowHalfOpen = true;
 		conn.socketRemote(opts, function(err) {
 			// Connected
-			// TODO: check error
-			conn.socket.setNoDelay(true);
-			conn.socket.setKeepAlive(true);
-//			openGroup(0);
 		});
 		
 		
@@ -51,6 +48,9 @@ var Client = function(){
 		});
 		conn.socket.on('connect', function(){
 			console.log('EIBD Connected');
+			conn.socket.setNoDelay(true);
+			conn.socket.setKeepAlive(true);
+//			openGroup(0);
 			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.socket.on('close', function(){
