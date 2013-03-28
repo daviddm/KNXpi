@@ -31,16 +31,18 @@ var Client = function(){
 		}
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
-		conn.socketRemote(opts, function() {
+		conn.socketRemote(opts, function(err) {
 			// Connected
+			// TODO: check error
+			conn.socket.setNoDelay(true);
+			conn.socket.setKeepAlive(true);
+			openGroup(0);
 		});
 		
-		conn.socket.setNoDelay(true);
-		openGroup(0);
 		
-		conn.on('data', function(action, src, dest, val) {
-			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
-		});
+//		conn.on('data', function(action, src, dest, val) {
+//			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
+//		});
 		conn.socket.on('data', function(data){
 			
 		});
