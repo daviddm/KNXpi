@@ -70,7 +70,7 @@ var eibc = function(){
 			console.log('Reading ' + addr)
 			if(callback) callback();
 		});
-	}
+	};
 	/**
 	 * addr - in format x/x/x
 	 * wOnly - Write only
@@ -80,7 +80,7 @@ var eibc = function(){
 		conn.openTGroup(conn.str2addr(addr), wOnly, function (err) {
 			if(err) {console.log('ERROR opening T_Group');return}
 			callback();
-		}
+		});
 	};
 		
 	return that;
