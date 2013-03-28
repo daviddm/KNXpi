@@ -37,6 +37,9 @@ var eibc = function(){
 		openGroup(0, function() {
 			
 		});
+		conn.on('data', function(action, src, dest, val) {
+			console.log('Group ' + action + ' ' + src + ' ' + dest + ' ' + val);
+		});
 		conn.socket.on('data', function(data){
 			if(que.length > 0) {
 				
