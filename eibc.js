@@ -59,7 +59,7 @@ var eibc = function(){
 	 * value - 1|0
 	 */
 	that.groupswrite = function(addr, val, callback) {
-		openTGroup(conn.str2addr(addr), 0, function () {
+		openTGroup(addr, 0, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0x80 | val;
@@ -84,7 +84,7 @@ var eibc = function(){
 	 * addr - in format x/x/x
 	 */
 	that.groupread = function(addr, callback) {
-		openTGroup(eibd.str2addr(addr), 0, function () {
+		openTGroup(addr, 0, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0;
