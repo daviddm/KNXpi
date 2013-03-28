@@ -34,6 +34,9 @@ var eibc = function(){
 		conn.socketRemote(opts, function() {
 			// Connected
 		});
+		openGroup(0, function() {
+			
+		});
 		conn.socket.on('data', function(data){
 			if(que.length > 0) {
 				
