@@ -50,6 +50,10 @@ var eibc = function(){
 		conn.socket.on('close', function(){
 			console.log('EIBD Transmission error');
 		});
+		
+		conn.end = function() {
+			console.log('Trying to end connection');
+		}
 	};
 	
 	/**
