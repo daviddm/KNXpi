@@ -63,12 +63,14 @@ var eibc = function(){
 		});
 	};
 	that.groupread = function(addr, callback) {
-		var data = new Array(2);
-		data[0] = 0;
-		data[1] = 0;
-		conn.sendAPDU(data, function() {
-			console.log('Reading ' + addr)
-			if(callback) callback();
+		openTGroup(conn.str2addr(addr), 0, function () {
+			var data = new Array(2);
+			data[0] = 0;
+			data[1] = 0;
+			conn.sendAPDU(data, function() {
+				console.log('Reading ' + addr)
+				if(callback) callback();
+			});
 		});
 	};
 	/**
