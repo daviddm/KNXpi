@@ -35,7 +35,7 @@ var eibc = function(){
 			// Connected
 		});
 		openGroup(0, function() {
-			
+			console.log('Opened Group listening');
 		});
 		conn.on('data', function(action, src, dest, val) {
 			console.log('Group ' + action + ' ' + src + ' ' + dest + ' ' + val);
