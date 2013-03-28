@@ -33,7 +33,7 @@ var Client = function(){
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
 		conn.socketRemote(opts, function() {
 			// Connected
-			conn.socket.setNoDelay();
+			conn.socket.setNoDelay(true);
 			openGroup(0);
 		});
 		conn.on('data', function(action, src, dest, val) {
