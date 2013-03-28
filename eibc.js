@@ -33,18 +33,13 @@ var eibc = function(){
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
 		conn.socketRemote(opts, function() {
 			// Connected
-			openGroup(0, function() {
-				console.log('Opened Group listening');
-			});
+			openGroup(0);
 		});
 		conn.on('data', function(action, src, dest, val) {
-			console.log('Group ' + action + ' ' + src + ' ' + dest + ' ' + val);
+			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
 		});
 		conn.socket.on('data', function(data){
-			if(que.length > 0) {
-				
-			}
-			console.log(data);
+			
 		});
 		conn.socket.on('end', function(){
 			console.log('EIBD Closed the connection');
