@@ -31,5 +31,8 @@ io.sockets.on('connection', function (socket) {
 			callback();
 		});
 	});
+	eibc.opengroup(addr, function() {
+		console.log('group callback');
+	});
 });
 

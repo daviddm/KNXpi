@@ -24,6 +24,13 @@ EIBClient.groupread = function(addr, callback) {
 		eibc.groupread(addr, callback);
 	});
 };
+EIBClient.opengroup = function(addr, callback) {
+	if(typeof addr === 'undefined'){return}
+	eibc = Client();
+	eibc.connect(EIBClient.opts, function(){
+		eibc.openGroup(0);
+	});
+};
 
 var Client = function(){
 	var that = {};
