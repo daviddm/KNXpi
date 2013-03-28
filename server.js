@@ -31,6 +31,6 @@ io.sockets.on('connection', function (socket) {
 			callback();
 		});
 	});
-	eibc.opengroup(0);
 });
 
+eibc.opengroup(0);
