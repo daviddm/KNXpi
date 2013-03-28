@@ -24,11 +24,10 @@ EIBClient.groupread = function(addr, callback) {
 		eibc.groupread(addr, callback);
 	});
 };
-EIBClient.opengroup = function(addr, callback) {
-	if(typeof addr === 'undefined'){return}
+EIBClient.opengroup = function(wOnly, callback) {
 	eibc = Client();
 	eibc.connect(EIBClient.opts, function(){
-		eibc.openGroup(0);
+		eibc.openGroup(wOnly);
 	});
 };
 
