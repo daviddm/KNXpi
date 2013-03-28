@@ -19,7 +19,7 @@ EIBClient.groupread = function(addr, callback) {
 	eibc.groupread(addr, callback);
 };
 
-var eibc = function(){
+var Client = function(){
 	var that = {};
 	var que = new Array();
 	var conn;
@@ -125,5 +125,5 @@ var eibc = function(){
 	return that;
 };
 
-eibc = eibc();
+eibc = Client();
 eibc.connect(EIBClient.opts);
