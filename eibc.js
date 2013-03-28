@@ -27,7 +27,7 @@ EIBClient.groupread = function(addr, callback) {
 EIBClient.opengroup = function(wOnly, callback) {
 	eibc = Client();
 	eibc.connect(EIBClient.opts, function(){
-		eibc.opengroup(wOnly);
+		eibc.opengroup(wOnly, callback);
 	});
 };
 
@@ -134,7 +134,7 @@ var Client = function(){
 	that.opengroup = function(wOnly, callback) {
 		if(typeof conn === 'undefined'){console.log('Open connection before Group');return}
 		conn.openGroupSocket(wOnly, function (err) {
-			callback();
+			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.on('data', function(action, src, dest, val) {
 			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
