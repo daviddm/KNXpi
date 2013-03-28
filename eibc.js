@@ -12,11 +12,17 @@ EIBClient.opts = {
 EIBClient.groupswrite = function(addr, val, callback) {
 	if(typeof addr === 'undefined'){return}
 	if(typeof val === 'undefined'){return}
-	eibc.groupswrite(addr, val, callback);
+	eibc = Client();
+	eibc.connect(EIBClient.opts, function(){
+		eibc.groupswrite(addr, val, callback);
+	});
 };
 EIBClient.groupread = function(addr, callback) {
 	if(typeof addr === 'undefined'){return}
-	eibc.groupread(addr, callback);
+	eibc = Client();
+	eibc.connect(EIBClient.opts, function(){
+		eibc.groupread(addr, callback);
+	});
 };
 
 var Client = function(){
@@ -48,8 +54,8 @@ var Client = function(){
 		});
 		conn.socket.on('connect', function(){
 			console.log('EIBD Connected');
-			conn.socket.setNoDelay(true);
-			conn.socket.setKeepAlive(true);
+//			conn.socket.setNoDelay(true);
+//			conn.socket.setKeepAlive(true);
 //			openGroup(0);
 			if(typeof callback != 'undefined'){callback();}
 		});
@@ -57,9 +63,9 @@ var Client = function(){
 			console.log('EIBD Transmission error');
 		});
 		
-		conn.end = function() {
-			console.log('Trying to end connection');
-		}
+//		conn.end = function() {
+//			console.log('Trying to end connection');
+//		}
 	};
 	
 	/**
@@ -129,6 +135,3 @@ var Client = function(){
 		
 	return that;
 };
-
-eibc = Client();
-eibc.connect(EIBClient.opts, function(){console.log('EIBC Started')});
