@@ -29,6 +29,7 @@ var eibc = function(){
 	var conn;
 	
 	that.connect = function(opts, callback) {
+		if(typeof conn != 'undefined'){callback();}
 		conn = eibd();
 		console.log('EIBD Trying to connect to ' + opts.host + ':' + opts.port);
 		conn.socketRemote(opts, function() {
@@ -110,6 +111,13 @@ var eibc = function(){
 		if(typeof conn === 'undefined'){console.log('Open connection before T_Group');return}
 		conn.openTGroup(conn.str2addr(addr), wOnly, function (err) {
 			if(err) {console.log('ERROR opening T_Group');return}
+			callback();
+		});
+	};
+	var openGroup = function(wOnly, callback) {
+		if(typeof conn === 'undefined'){console.log('Open connection before Group');return}
+		conn.openGroupSocket(wOnly, function (err) {
+			if(err) {console.log('ERROR opening Group');return}
 			callback();
 		});
 	};
