@@ -16,6 +16,12 @@ EIBClient.groupswrite = function(addr, val, callback) {
 		eibc.groupswrite(addr, val, callback);
 	});
 };
+EIBClient.groupread = function(addr, callback) {
+	if(typeof addr === 'undefined'){return}
+	eibc.connect(EIBClient.opts, function() {
+		eibc.groupread(addr, callback);
+	});
+};
 
 var eibc = function(){
 	var that = {};
@@ -47,12 +53,12 @@ var eibc = function(){
 	};
 	
 	/**
-	 * For sending less than 6 bit
+	 * For sending LESS than 6 bit
 	 * addr - in format x/x/x
 	 * value - 1|0
 	 */
 	that.groupswrite = function(addr, val, callback) {
-		openTGroup(conn.str2addr(addr), 0, function () {
+		openTGroup(conn.str2addr(addr), q, function () {
 			var data = new Array(2);
 			data[0] = 0;
 			data[1] = 0x80 | val;
@@ -62,6 +68,18 @@ var eibc = function(){
 			});
 		});
 	};
+	/**
+	 * For sending MORE than 6 bit
+	 * addr - in format x/x/x
+	 * value - 0..255
+	 */
+	that.groupwrite = function(addr, val, callback) {
+		console.log('Not Implemented this yet');
+	};
+	/**
+	 * Reading status of the addr
+	 * addr - in format x/x/x
+	 */
 	that.groupread = function(addr, callback) {
 		openTGroup(conn.str2addr(addr), 0, function () {
 			var data = new Array(2);
@@ -73,6 +91,10 @@ var eibc = function(){
 			});
 		});
 	};
+	that.test = function(){
+		console.log('test');
+	}
+	
 	/**
 	 * addr - in format x/x/x
 	 * wOnly - Write only
