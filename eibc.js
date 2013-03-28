@@ -131,6 +131,9 @@ var Client = function(){
 			if(err) {console.log('ERROR opening Group');return}
 			callback();
 		});
+		conn.on('data', function(action, src, dest, val) {
+			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
+		});
 	};
 		
 	return that;
