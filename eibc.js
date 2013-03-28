@@ -45,7 +45,7 @@ var eibc = function(){
 		});
 		conn.socket.on('connect', function(){
 			console.log('EIBD Connected');
-			callback();
+			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.socket.on('close', function(){
 			console.log('EIBD Transmission error');
