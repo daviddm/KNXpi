@@ -139,6 +139,7 @@ var Client = function(){
 		if(typeof conn === 'undefined'){console.log('Open connection before Group');return}
 		conn.openGroupSocket(wOnly, function (err) {
 			isListener = true;
+			console.log('Enabled listener');
 			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.on('data', function(action, src, dest, val) {
