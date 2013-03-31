@@ -116,7 +116,7 @@ var Client = function(){
 			data[1] = 0;
 			conn.sendAPDU(data, function() {
 				console.log('Reading ' + addr)
-				that.addListenerCallback(addr, callback)
+				groupListener.addListenerCallback(addr, callback)
 			});
 		});
 	};
