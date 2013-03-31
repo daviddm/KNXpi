@@ -111,7 +111,7 @@ var Client = function(){
 			data[0] = 0;
 			data[1] = 0;
 			conn.sendAPDU(data, function() {
-				console.log('Reading ' + addr + ', ' + conn.addr2str(addr))
+				console.log('Reading ' + addr + ', ' + conn.addr2str(addr, true))
 				if(callback) callback();
 			});
 		});
