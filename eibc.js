@@ -154,7 +154,7 @@ var Client = function(){
 		if(!isListener){console.log('Can not add listener to this object');return}
 		// TODO add functionality to have more than 1 callback per addr
 		console.log('Addling callback for ' + addr);
-		groupListener.listenerCallbacks[addr] = callback;
+		listenerCallbacks[addr] = callback;
 	}
 	
 	that.fireListenerCallback = function(addr, val) {
