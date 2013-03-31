@@ -144,7 +144,7 @@ var Client = function(){
 		conn.on('data', function(action, src, dest, val) {
 			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString(), true) + ' ' + val);
 			if(action == 'Response') {
-				fireListenerCallback(conn.addr2str(dest.toString(), true), val);
+				that.fireListenerCallback(conn.addr2str(dest.toString(), true), val);
 			}
 		});
 	};
@@ -152,10 +152,10 @@ var Client = function(){
 	that.addListenerCallback = function(addr, callback) {
 		if(!isListener){console.log('Can not add listener to this object');return}
 		// TODO add functionality to have more than 1 callback per addr
-		listenerCallbacks[addr] = callback;
+		groupListener.listenerCallbacks[addr] = callback;
 	}
 	
-	var fireListenerCallback = function(addr, val) {
+	that.fireListenerCallback = function(addr, val) {
 		if(typeof listenerCallbacks[addr] !== 'undefined') {
 			listenerCallbacks[addr](val);
 		}
