@@ -33,8 +33,8 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 	socket.on('articleStatusChange', function (addr, val, callback) {
-		eibc.groupswrite(addr, val, function() {
-			callback();
+		eibc.groupswrite(addr, val, function(status) {
+			callback({"article":addr,"status":status});
 		});
 	});
 });

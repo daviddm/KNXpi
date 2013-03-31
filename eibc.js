@@ -91,7 +91,7 @@ var Client = function(){
 			data[1] = 0x80 | val;
 			conn.sendAPDU(data, function() {
 				console.log('Sent "' + val + '" to ' + addr)
-				if(callback) callback();
+				groupListener.addListenerCallback(addr, callback)
 			});
 		});
 	};

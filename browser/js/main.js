@@ -13,8 +13,8 @@ COM.Web = function(){
 	var bindButtons = function(){
 		var buttons = $('button');
 		$('button').each(function(){
-			element = this;
-			jqElement = $(element);
+			var element = this;
+			var jqElement = $(element);
 			element.innerHTML = 'Checking...';
 			var addr = jqElement.data('article-status-address');
 			COM.Server.checkStatus(addr, function(data){that.updateStatus(element, data)});
@@ -22,11 +22,12 @@ COM.Web = function(){
 		});
 	};
 	var buttonClick = function(e) {
-		jqThis = $(this);
+		var element = this;
+		var jqThis = $(this);
 		var addr = jqThis.data('article-address');
 		var status = jqThis.data('article-status');
 		var status_new = (status === 1 ? 0 : 1);
-		COM.Server.changeStatus(addr, status_new, function(){});
+		COM.Server.changeStatus(addr, status_new, function(data){that.updateStatus(element, data)});
 		jqThis.data('article-status', status_new);
 		return false;
 	};
