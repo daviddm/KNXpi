@@ -6,7 +6,9 @@
   "dependencies": {
     "express": "3.1.0",
     "socket.io": "0.9.13",
-    "eibd": "0.1.7"
+    "eibd": "0.1.7",
+    "htpassword": "1.1.2",
+    "htdigest": "1.0.9"
   },
   "engine": "0.8.x"
 }

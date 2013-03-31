@@ -3,6 +3,7 @@
  */
 var eibd = require('eibd');
 var EIBClient = exports;
+var groupListener;
 
 EIBClient.opts = {
 	host: '127.0.0.1',
@@ -28,6 +29,7 @@ EIBClient.opengroup = function(wOnly, callback) {
 	eibc = Client();
 	eibc.connect(EIBClient.opts, function(){
 		eibc.opengroup(wOnly, callback);
+		groupListener = eibc;
 	});
 };
 
@@ -35,6 +37,8 @@ var Client = function(){
 	var that = {};
 	var que = new Array();
 	var conn;
+	var isListener = false;
+	var listenerCallbacks = new Array();
 	
 	that.connect = function(opts, callback) {
 		if(typeof conn != 'undefined') {
@@ -112,7 +116,7 @@ var Client = function(){
 			data[1] = 0;
 			conn.sendAPDU(data, function() {
 				console.log('Reading ' + addr)
-				if(callback) callback();
+				that.addListenerCallback(addr, callback)
 			});
 		});
 	};
@@ -134,11 +138,25 @@ var Client = function(){
 	that.opengroup = function(wOnly, callback) {
 		if(typeof conn === 'undefined'){console.log('Open connection before Group');return}
 		conn.openGroupSocket(wOnly, function (err) {
+			isListener = true;
 			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.on('data', function(action, src, dest, val) {
 			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString(), true) + ' ' + val);
+			fireListenerCallback(conn.addr2str(dest.toString(), true), val);
 		});
+	};
+	 // TODO add this a an extend class to this object
+	that.addListenerCallback = function(addr, callback) {
+		if(!isListener){console.log('Can not add listener to this object');return}
+		// TODO add functionality to have more than 1 callback per addr
+		listenerCallbacks[addr] = callback;
+	}
+	
+	var fireListenerCallback = function(addr, val) {
+		if(typeof listenerCallbacks[addr] !== 'undefined') {
+			listenerCallbacks[addr](val);
+		}
 	};
 		
 	return that;
