@@ -16,7 +16,7 @@ COM.Web = function(){
 			element = this;
 			jqElement = $(element);
 			element.innerHTML = 'Checking...';
-			var addr = jqElement.data('article-address');
+			var addr = jqElement.data('article-status-address');
 			COM.Server.checkStatus(addr, function(data){that.updateStatus(element, data)});
 			jqElement.click(buttonClick);
 		});
