@@ -137,7 +137,7 @@ var Client = function(){
 			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.on('data', function(action, src, dest, val) {
-			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString()) + ' ' + val);
+			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString(), true) + ' ' + val);
 		});
 	};
 		
