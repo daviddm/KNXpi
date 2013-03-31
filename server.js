@@ -29,7 +29,7 @@ io.set('log level', 2);
 io.sockets.on('connection', function (socket) {
 	socket.on('articleStatus', function (addr, callback) {
 		eibc.groupread(addr, function(status) {
-			callback({"article":addr,"status":1});
+			callback({"article":addr,"status":status});
 		});
 	});
 	socket.on('articleStatusChange', function (addr, val, callback) {
