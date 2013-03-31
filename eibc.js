@@ -143,7 +143,9 @@ var Client = function(){
 		});
 		conn.on('data', function(action, src, dest, val) {
 			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString(), true) + ' ' + val);
-			fireListenerCallback(conn.addr2str(dest.toString(), true), val);
+			if(action == 'Response') {
+				fireListenerCallback(conn.addr2str(dest.toString(), true), val);
+			}
 		});
 	};
 	 // TODO add this a an extend class to this object
