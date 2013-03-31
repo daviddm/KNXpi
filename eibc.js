@@ -146,6 +146,8 @@ var Client = function(){
 			console.log('GroupSocket ' + action + ' ' + src + ' ' + conn.addr2str(dest.toString(), true) + ' ' + val);
 			if(action == 'Response') {
 				that.fireListenerCallback(conn.addr2str(dest.toString(), true), val);
+			} else if(action == 'Write') {
+				that.fireListenerCallback(conn.addr2str(dest.toString(), true), val);
 			}
 		});
 	};
