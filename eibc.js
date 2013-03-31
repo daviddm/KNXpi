@@ -111,7 +111,7 @@ var Client = function(){
 			data[0] = 0;
 			data[1] = 0;
 			conn.sendAPDU(data, function() {
-				console.log('Reading ' + addr + ', ' + conn.addr2str(conn.str2addr(addr), true))
+				console.log('Reading ' + addr)
 				if(callback) callback();
 			});
 		});
@@ -137,7 +137,7 @@ var Client = function(){
 			if(typeof callback != 'undefined'){callback();}
 		});
 		conn.on('data', function(action, src, dest, val) {
-			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest + ' ' + val);
+			console.log('GroupSocket ' + action + ' ' + src + ' ' + dest.toString() + ' ' + val);
 		});
 	};
 		
