@@ -9,6 +9,8 @@ COM.Web = function(){
 	var that = {};
 	that.init = function(){
 		bindButtons();
+		// Specific for test env
+		$('#videoStream').attr('src', 'http://fridell.dyndns.org:90/video.cgi?resolution=vga&amp;random=' + Math.random());
 	};
 	var bindButtons = function(){
 		var buttons = $('button');
