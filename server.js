@@ -2,7 +2,8 @@
  * New node file
  */
 
-var app = require('express')(),
+var config = require('./config.js'),
+	app = require('express')(),
 	express = require('express'),
 //	auth = require('http-auth'),
 //	basic = auth({
@@ -14,7 +15,7 @@ var app = require('express')(),
 	io = require('socket.io').listen(server),
 	eibc = require('./eibc');
 
-var port = process.env.PORT || 3000;
+var port = config.server.port;
 
 server.listen(port, function() {
   console.log('Listening on ' + port + ' for browsers');
