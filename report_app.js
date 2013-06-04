@@ -18,6 +18,7 @@ data.server.platform = os.platform();
 data.server.release = os.release();
 data.server.uptime = os.uptime();
 data.server.load = os.loadavg();
+data.server.cpu = os.cpus();
 data.server.memory_total = os.totalmem();
 data.server.memory_free = os.freemem();
 
