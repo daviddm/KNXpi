@@ -7,7 +7,7 @@
     "express": "3.1.0",
     "socket.io": "0.9.13",
 //    "redis": "latest",
-    "eibd": "0.1.7"
+    "eibd": "0.2.0"
   },
   "engine": "0.8.x"
 }
